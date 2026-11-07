@@ -8,11 +8,11 @@ Copyright 2026, Spark Software Development, LLC.
 
 Call `yamlcamel.decode` to read one document and `yamlcamel.encode` to write a Lua value. Tables represent mappings and sequences; `yamlcamel.null` keeps an explicit YAML null distinct from an absent Lua field, and `yamlcamel.EMPTY_MAPPING` writes an empty mapping instead of an empty sequence.
 
-The supported syntax includes block and flow collections, quoted strings, block scalars, anchors, aliases and explicit tags. Unknown tags are preserved as wrappers you can inspect. This is a YAML subset rather than a promise to accept every YAML document, and it does not preserve comments or formatting.
+The parser follows [YAML 1.2.2](https://yaml.org/spec/1.2.2/) core scalar rules and supports block and flow collections, quoted strings, block scalars, anchors, aliases, and explicit tags. Unknown tags are kept in wrappers you can inspect. The syntax support is a subset of the specification. Encoding writes fresh YAML and drops the original comments and formatting.
 
 Use `decode_all` and `encode_all` for a complete document stream. `decode_file_stream` calls back once per document so a multi-document file does not need to be held in memory as one string. It streams documents, not the individual elements of one large sequence.
 
-File access, gzip compression and HTTP transport are replaceable. The parser itself needs only Lua, while the default gzip and network helpers load their extra rocks when used. Nesting, emission and transfer limits bound several kinds of input and output work.
+File access, gzip compression and HTTP transport are replaceable. The parser and emitter need only Lua, which makes them easy to embed without installing extra rocks. The default gzip and network helpers load their extra rocks when used. Nesting, emission and transfer limits bound several kinds of input and output work.
 
 ## Configuration
 
