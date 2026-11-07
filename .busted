@@ -1,0 +1,6 @@
+return {
+  default = {
+    lpath = "src/?.lua;src/?/init.lua",
+    verbose = true,
+  },
+}
